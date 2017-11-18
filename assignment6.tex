@@ -1,0 +1,152 @@
+\documentclass[fleqn]{article}
+
+\usepackage{amsmath} % for equations
+\usepackage{amssymb} % for symbols
+\usepackage[margin=0.75in]{geometry} % for setting margin
+%\usepackage{tikz} % for drawing
+%\usepackage{verbatim} % for multiline comments
+%\usepackage{graphicx} % for pics
+\usepackage{parskip} % looks nice
+\usepackage{scrextend} % for block indentation
+
+\title{Assignment 6}
+\author{Raz Reed}
+\date{October 10, 2017}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+
+\newpage
+{\Large\bf Exercise 9.8}\vspace{1em}\par
+\textbf{(c)} Integration method:
+\begin{equation*}
+	\int\limits_{m-1}^{n}f(x)dx \leq \sum\limits_{i=m}^{n}f(i) \leq \int\limits_{m}^{n+1}f(x)dx
+\end{equation*}
+Find the upper and lower bounds for $\sum\limits_{i=1}^{n}i2^i$.
+\begin{align*}
+	&m = 1\\
+	&f(i) = i2^i\\
+	&f(x) = x2^x
+\end{align*}
+Using integration by parts:
+\begin{align*}
+	&\int udv = uv - \int vdu\\
+	&u = x \\&du = dx\\
+	&dv = 2^xdx \\&v = \int 2^xdx = \frac{1}{ln(2)}2^x\\
+	&\int f(x)dx = \int x2^xdx =\\
+	&\frac{1}{ln(2)}x2^x - \int \frac{1}{ln(2)}2^xdx =\\
+	&\frac{1}{ln(2)}x2^x - \frac{1}{ln(2)} \cdot \int 2^xdx =\\
+	&\frac{1}{ln(2)}x2^x - \frac{1}{ln(2)} \cdot \frac{1}{ln(2)}2^x =\\
+	&\frac{2^x}{ln(2)} \left(x-\frac{1}{ln(2)}\right)
+\end{align*}
+Lower bound:
+\begin{align*}
+	&\int\limits_{0}^{n}f(x)dx =\\
+	&\left.\left(\frac{2^x}{ln(2)} \left(x-\frac{1}{ln(2)}\right)\right)\right|_0^n =\\
+	&\left(\frac{2^n}{ln(2)} \left(n-\frac{1}{ln(2)}\right)\right) + \frac{1}{ln(2)^2}
+\end{align*}
+Upper bound:
+\begin{align*}
+	&\int\limits_{1}^{n+1}f(x)dx =\\
+	&\left.\left(\frac{2^x}{ln(2)} \left(x-\frac{1}{ln(2)}\right)\right)\right|_1^{n+1} =\\
+	&\left(\frac{2^{n+1}}{ln(2)} \left(n+1-\frac{1}{ln(2)}\right)\right) + \frac{2}{ln(2)^2}\left(1-\frac{1}{ln(2)}\right)
+\end{align*}
+Approximation of the sum:
+\begin{equation*}
+	\left(\frac{2^n}{ln(2)} \left(n-\frac{1}{ln(2)}\right)\right) + \frac{1}{ln(2)^2} \leq \sum\limits_{i=m}^{n}f(i) \leq \left(\frac{2^{n+1}}{ln(2)} \left(n+1-\frac{1}{ln(2)}\right)\right) + \frac{2}{ln(2)^2}\left(1-\frac{1}{ln(2)}\right)
+\end{equation*}
+Order of the function:
+\begin{equation*}
+	\Theta(n) = n2^n
+\end{equation*}
+
+\newpage
+{\Large\bf Exercise 11.9}\vspace{1em}\par
+The fastest connection is $6 \rightarrow 1 \rightarrow 1 \rightarrow 1 \rightarrow 2$, which adds up to 11ms.
+
+\newpage
+{\Large\bf Problem 10.2}\vspace{1em}\par
+\textbf{(a)}
+\begin{align*}
+	&gcd(1200,2250)=\\
+	&gcd(1050,1200)=\\
+	&gcd(150,1050)=\\
+	&gcd(0,150)=\\
+	&150
+\end{align*}
+The GCD of 2250 and 1200 is 150.
+\begin{align*}
+	&1050 = 2250 \cdot 1 + 1200 \cdot -1\\
+	&150 = 1200 - 1050 = 1200 - (2250 \cdot 1 + 1200 \cdot -1) = 2250 \cdot -1 + 1200 \cdot 2\\
+	&x = -1\\
+	&y = 2
+\end{align*}\vspace{1em}
+\textbf{(b)}
+\begin{align*}
+	&150 = 2250 \cdot 7 + 1200 \cdot -13\\
+	&x = 7\\
+	&y = -13
+\end{align*}
+
+\newpage
+{\Large\bf Problem 10.9}\vspace{1em}\par
+\textbf{(a)} Using (L, R) as notation for the number of gallons in the left (L) and right (R) jugs:
+\begin{equation*}
+	(0,0) \rightarrow (6,0) \rightarrow (0,6) \rightarrow (6,6) \rightarrow (0,12) \rightarrow (6,12) \rightarrow (\mathbf{3},15)
+\end{equation*}
+Jugs of 4 and 5 gallons cannot be measured. Both jugs hold at most multiples of 3 gallons. It is impossible to make any number but a multiple of 3 by only using increments of 3. Therefore, using only 6- and 15-gallon jugs, it is impossible to measure 4 and 5 gallons.\vspace{1em}\par
+\textbf{(b)} Using the same notation:
+\begin{align*}
+	&(0,0) \rightarrow (5,0) \rightarrow (0,5) \rightarrow (5,5) \rightarrow (0,10) \rightarrow\\
+	&(5,10) \rightarrow (4,11) \rightarrow (4,0) \rightarrow (0,4) \rightarrow (5,4) \rightarrow (0,9) \rightarrow\\
+	&(5,9) \rightarrow (3,11) \rightarrow (3,0) \rightarrow (0,3) \rightarrow (5,3) \rightarrow (0,8)\rightarrow\\
+	&(5,8) \rightarrow (2,11) \rightarrow (2,0) \rightarrow (0,2) \rightarrow (5,2) \rightarrow (0,\mathbf{7}) \rightarrow\\
+	&(5,7) \rightarrow (1,11) \rightarrow (1,0) \rightarrow (0,1) \rightarrow (5,1) \rightarrow (0,\mathbf{6})
+\end{align*}
+
+\newpage
+{\Large\bf Problem 10.24}\vspace{1em}\par
+\textbf{(a)} There are 12 hours in a clock cycle and $233 \equiv 5$ (mod 12), so the hour hand (which starts at 3) will end up at $3+5=8$ o'clock.\vspace{1em}\par
+\textbf{(b)} Assuming the hour hand starts at 3:
+\begin{align*}
+	&14 \cdot 233 = 12 \cdot 233 + 2 \cdot 233\\
+	&12 \cdot 233 \equiv 0 \text{ (mod 12)}\\
+	&2 \cdot 233 \equiv 10 \text{ (mod 12)}\\
+	&14 \cdot 233 \equiv 10 \text{ (mod 12)}
+\end{align*}
+The hour hand will be at 10 past 3, which is 1.\\\par
+\textbf{(c)} Assuming the hour hand starts at 3:
+\begin{align*}
+	&233^{233} \text{ mod } 12 = \left(233 \text{ mod } 12\right)^{233} \text{mod 12} = 5^{233} \text{ mod } 12\\
+	&5^0 \text{ mod } 12 = 1\\
+	&5^1 \text{ mod } 12 = 5\\
+	&5^2 \text{ mod } 12 = 1\\
+	&5^3 \text{ mod } 12 = 5\\
+	&5^4 \text{ mod } 12 = 1\\
+	&...\\
+	&5^{2k+1} \text{ mod } 12 = 5, k \in \mathbb{N}\\
+	&5^{233} \text{ mod } 12 = 5\\
+	&233^{233} \text{ mod } 12 = 5\\
+	&3+5=8
+\end{align*}
+The hour hand ends at 8 o'clock.
+
+\newpage
+{\Large\bf Problem 11.24}\vspace{1em}\par
+\textbf{(a)} Claim: any social network with 10 people has a 4-person friend clique or a 3-person war.\par
+Starting with the proof in (b), we know that any social network with 9 people has a 4-person friend clique or a 3-person war. Adding a new person to this group, i.e. making the total 10 people, does not change this property. For the new person to make it so that there is not a 4-person friend clique or a 3-person war, he/she would have to change the already existing relationships of the people in the group -- which is impossible for him/her to do. Therefore, the claim is true.\vspace{1em}\par
+\textbf{(b)} Claim: any social network with 9 people has a 4-person friend clique or a 3-person war.\par
+To prove the claim, we recognize two possibilities:
+\begin{enumerate}
+	\item There is no 3-person war in the group of 9 people. If this is the case, then everyone is at least mutual friends with everyone else. If everyone is at least mutual friends with everyone else, there can still be two-person wars. Assume we have person A and person B, and they are in a two-person war (they are not friends). Then, everyone else must be connected via mutual friends with either A or B so as to preserve the property of a social network and to preserve the assumption that there is no 3-person war.
+	\begin{itemize}
+		\item Assume that there is no 2-person war in the group of 9 people. If this is the case, then everyone is mutual friends with everyone else, and therefore there is a 4-person clique.
+		\item Assume that there is one 2-person war. Everyone else must be friends with A or B, or there would be another 3-person war. This creates a 4-person clique.
+		\item Assume that there are two 2-person wars. Each person involved in each war must be friends with the people involved in the other war, or one person involved in one war could be involved in the other. In either case, everyone else in the group must be mutual friends or there would be another 3-person war. This creates a 4-person clique.
+		\item This same argument applies for three and four 2-person wars. Everyone else not involved in the war must be friends with everyone else (i.e. there exists a 4-person clique) or there would be a 3-person war. Having five or more 2-person wars implies having a 3-person war since at least one of those involved in a 2-person war would have to be involved in another 2-person war, and since all other 8 people would be involved in a 2-person war then that 2-person war would become a 3-person war, so this cannot be the case. Therefore, if there is no 3-person war, then there is a 4-person friend clique.
+	\end{itemize}
+	\item There is no 4-person friend clique in the group of 9 people. If this is the case, then there can be at most 3 3-person friend cliques. In this case, there can be at least two connections between people in one friend clique and people in another friend clique without creating a 4-person clique. This is the maximum allowable number of connections in a group of 9 people given that there cannot be a 4-person clique. Knowing this, there is still a 3-person war between each person in each group who is not connected to members of both other groups. Removing a connection between nodes does not change an already existing war, so there is a war for all formations of 9 people with less than the max number of connections not allowing a 4-person clique, i.e. all. Therefore, if there is no 4-person clique, then there is a 3-person war.
+\end{enumerate}
+If there is not a 3-person war, then there exists a 4-person friend clique. If there is not a 4-person friend clique, then there exists a 3-person war. Therefore, it cannot be the case that there is not a 3-person war and not a 4-person friend clique. Therefore, there exists a 4-person friend clique or a 3-person war. The claim is true.
+\end{document}

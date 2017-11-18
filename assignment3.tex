@@ -1,0 +1,177 @@
+\documentclass[fleqn]{article}
+
+\usepackage{amsmath} % for equations
+\usepackage{amssymb} % for symbols
+\usepackage[margin=0.75in]{geometry} % for setting margin
+%\usepackage{tikz} % for drawing
+%\usepackage{verbatim} % for multiline comments
+\usepackage{color} % for colored proofs
+\usepackage{parskip} % looks nice
+\usepackage{scrextend} % for block indentation
+
+\title{Assignment 3}
+\author{Raz Reed}
+\date{September 20, 2017}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+
+\newpage
+{\noindent\Large\bf Problem 5.4}\vspace{1em}\par
+\textbf{(i)} Not valid. When proving $P(n) \rightarrow P(n+1)$, you may not assume that what you are trying to prove is true.\par
+\textbf{(ii)} Valid. When proving $P(n) \rightarrow P(n+1)$, you may assume $P(n+1)$ is false in order to establish a proof by contradiction.
+
+\newpage
+{\noindent\Large\bf Problem 5.3}\vspace{1em}\par
+\textbf{(c)} $P(2)$ is T and $P(n) \rightarrow (P(n^2) \land P(n-2))$ is T for $n \geq 2$.
+\begin{equation*}
+	P(2) \rightarrow P(4) \rightarrow P(16) \rightarrow P(256) \rightarrow\ ...
+\end{equation*}
+\begin{equation*}
+	P(2) \leftarrow P(4) \leftarrow P(6) \leftarrow P(8) \leftarrow\ ...
+\end{equation*}
+\par$P(n)$ is T for $n \geq 2$.
+
+\newpage
+{\noindent\Large\bf Problem 5.11}\vspace{1em}\par
+\textbf{(b)} $P(n): 1+\frac{1}{2}ln(n) \leq H_n \leq 1+ln(n)$.\par
+Claim: $P(n)$ is T for all $n > 0$.\par
+Proof:
+\begin{addmargin}{2em}
+	Base case: $P(1)$ is T.\par
+	Induction: assume $P(n)$, prove $P(n+1): 1+\frac{1}{2}ln(n+1) \leq H_{n+1} \leq 1+ln(n+1)$.
+	\begin{align*}
+		&H_n = 1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{n}\\
+		&H_{n+1} = 1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{n}+\frac{1}{n+1}\\
+		&H_{n+1} = H_n+\frac{1}{n+1}
+	\end{align*}
+	We know that for $0 \leq x \leq \frac{1}{2}, -2x \leq ln(1-x) \leq -x$.\par
+	If we plug in $\frac{1}{n+1}$ for $x$, we get:
+	\begin{align*}
+		&x = \frac{1}{n+1}\\
+		&\frac{-2}{n+1} \leq ln(1-\frac{1}{n+1}) \leq \frac{-1}{n+1}\\
+		&ln(1-\frac{1}{n+1}) = ln(\frac{n+1}{n+1}-\frac{1}{n+1}) = ln(\frac{n}{n+1}) = ln(n)-ln(n+1)\\
+		&\frac{-2}{n+1} \leq ln(n)-ln(n+1) \leq \frac{-1}{n+1}\\
+		&\frac{2}{n+1} \geq ln(n+1)-ln(n) \geq \frac{1}{n+1}\\
+		&\frac{1}{n+1} \leq ln(n+1)-ln(n) \leq \frac{2}{n+1}
+	\end{align*}
+	Take the right part of that inequality:
+	\begin{align*}
+		&ln(n+1)-ln(n) \leq \frac{2}{n+1}\\
+		&\frac{1}{2}ln(n+1)-\frac{1}{2}ln(n) \leq \frac{1}{n+1}\\
+		&\frac{1}{2}ln(n+1) \leq \frac{1}{2}ln(n)+\frac{1}{n+1}\\
+		&1+\frac{1}{2}ln(n+1) \leq 1+\frac{1}{2}ln(n)+\frac{1}{n+1} \leq H_n+\frac{1}{n+1} = H_{n+1}\\
+		&{\color{green}1+\frac{1}{2}ln(n+1) = H_{n+1}}
+	\end{align*}
+	We just proved the first part of $P(n+1)$. Now take the left part of the inequality:
+	\begin{align*}
+		&\frac{1}{n+1} \leq ln(n+1)-ln(n)\\
+		&ln(n+1)-ln(n) \geq \frac{1}{n+1}\\
+		&ln(n+1) \geq \frac{1}{n+1}+ln(n)\\
+		&1+ln(n+1) \geq ln(n)+1+\frac{1}{n+1} \geq H_n+\frac{1}{n+1} = H_{n+1}\\
+		&{\color{green}H_{n+1} \leq 1+ln(n+1)}\\
+		&\therefore P(n+1) \text{ is T.}
+	\end{align*}
+	Therefore, $P(n)$ is true for all $n > 0$.
+\end{addmargin}
+
+\newpage
+{\noindent\Large\bf Problem 5.43}\vspace{1em}\par
+\textbf{(a)} Allow $(x,y)$ to represent the x- and y-coordinate of the robot. Also treat the starting position of the robot as the origin $(0,0)$ of the grid. There are four directions the robot can move, and each move modifies its position as dictated by this table:\vspace{0.35cm}\par
+\begin{tabular}{c|l|c|c|c}
+	old position & \multicolumn{1}{c|}{move} & new position & change in $(x,y)$ & change in $x$ + change in $y$
+	\tabularnewline\hline
+	$(x,y)$ & down-left & $(x-1,y-1)$ & $(-1,-1)$ & -2\\
+	$(x,y)$ & down-right & $(x+1,y-1)$ & $(1,-1)$ & 0\\
+	$(x,y)$ & up-left & $(x-1,y+1)$ & $(-1,1)$ & 0\\
+	$(x,y)$ & up-right & $(x+1,y+1)$ & $(1,1)$ & 2
+\end{tabular}
+\vspace{0.35cm}\par
+The sum of the x- and y-coordinate of the robot $x+y$ is 0 at the start. Adding any even number to an even number will result in an even number. The robot's $x+y$ is even, and any move it makes will add an even number (-2, 0, or 2) to its $x+y$. Therefore, its $x+y$ will always be even.\par
+The shaded square is at $(1,0)$. Its $x+y$ is 1, an odd number. The robot's $x+y$ will always be even, therefore no sequence of moves takes the robot to the shaded square.\vspace{1em}\par
+
+\textbf{(b)} The robot now cannot move up one square and right one square. It has a new ability to move up two squares and right one square (in one move). It has all the other moves it had previously. I will demonstrate that this effectively grants it the ability to move in any orthogonal direction.\par
+For simplicity, assume that:
+\begin{itemize}
+	\item DL = robot moves down one and left one
+	\item DR = robot moves down one and right one
+	\item UL = robot moves up one and left one
+	\item UUR = robot moves up \textbf{two} and right one
+	\item U = robot moves up one
+	\item D = robot moves down one
+	\item L = robot moves left one
+	\item R = robot moves right one
+	\item UR = robot moves up one and right one
+\end{itemize}
+The last five moves can't be done by the robot in one step, but they can be achieved through series of steps listed in the third column of this table:\vspace{0.35cm}\par
+% note to self: in the tabular environment,
+% \newline ends the line inside the cell
+% \tabularnewline ends the row of the table
+\begin{tabular}{c|c|p{4cm}|c}
+	old position & new move & series of moves used to achieve the new move & change in $(x,y)$
+	\tabularnewline\hline
+	$(x,y)$ & U & DL, UUR & $(x,y+1)$\\
+	$(x,y)$ & D & DL, DL, DR, UUR & $(x,y-1)$\\
+	$(x,y)$ & L & DL, DL, UUR & $(x-1,y)$\\
+	$(x,y)$ & R & DL, DR, UUR & $(x+1,y)$\\
+	$(x,y)$ & UR & DL, UUR, DL, DR, UUR & $(x+1,y+1)$\\
+\end{tabular}
+\vspace{0.35cm}\par
+The robot can travel from one square to any orthogonally or diagonally adjacent square by a finite sequence of moves. Therefore, it can reach any square $(m,n)$ on the infinite grid by a finite sequence of moves.
+
+\newpage
+{\noindent\Large\bf Exercise 6.2}\vspace{1em}\par
+Claim: $P(n): n^3 < 2^n\quad \forall n \geq 10$.\par
+Proof:
+\begin{addmargin}{2em}
+	Base case: $P(10)$ is T.\par
+	Induction: assume $P(n)$, prove $P(n+1): (n+1)^3 < 2^{n+1}\quad \forall n \geq 10$.
+	\begin{align*}
+		&n^3 < 2^n\\
+		&(n+1)^3 = n^3+3n^2+3n+1\\
+		&n^3+3n^2+3n+1 < 2^n+3n^2+3n+1\\
+		&(n+1)^3 < 2^n+3n^2+3n+1
+	\end{align*}
+	Stuck; we must create a new hypothesis: $Q(n): n^3 < 2^n \land 3n^2+3n+1 < 2^n\quad \forall n \geq 10$.\par
+	Base case: $Q(10)$ is T.\par
+	Induction: assume $Q(n)$, prove $Q(n+1): (n+1)^3 < 2^{n+1} \land 3n^2+9n+7 < 2^{n+1}\quad \forall n \geq 10$.
+	\begin{align*}
+		&n^3 < 2^n\\
+		&3n^2+3n+1 < 2^n\\
+		&n^3+3n^2+3n+1 < n^3+2^n < 2^n+2^n = 2^{n+1}\\
+		&{\color{green}(n+1)^3 < 2^{n+1}}
+	\end{align*}
+	We proved the first half of $Q(n)$ but we're stuck on the second; we must create a new hypothesis: $R(n): n^3 < 2^n \land 3n^2+3n+1 < 2^n \land 6n+6 < 2^n\quad \forall n \geq 10$.\par
+	Base case: $R(10)$ is T.\par
+	Induction: assume $R(n)$, prove $R(n+1): (n+1)^3 < 2^{n+1} \land 3n^2+9n+7 < 2^{n+1} \land 6(n+1)+6 < 2^{n+1}\quad \forall n \geq 10$.
+	\begin{align*}
+		&{\color{green}(n+1)^3 < 2^{n+1}} \text{ (proven already)}\\
+		&6n+6 < 2^n\\
+		&3n^2+3n+1 < 2^n\\
+		&3n^2+3n+1+6n+6 < 2^n+6n+6 < 2^n+2^n = 2^{n+1}\\
+		&{\color{green}3n^2+9n+7 < 2^{n+1}}\\\\
+		&6n+6 < 2^n\\
+		&6 < 6n+6\\
+		&6 < 2^n\\
+		&6n+6+6 < 2^n+6 < 2^n+2^n = 2^{n+1}\\
+		&{\color{green}6n+12 < 2^{n+1}}\\
+		&R(n+1) \text{ is T.}\\
+		&R(n) \rightarrow R(n+1)\\
+		&\therefore Q(n) \rightarrow Q(n+1)\\
+		&\therefore P(n) \rightarrow P(n+1)
+	\end{align*}
+	Therefore, the claim $P(n)$ is true for all $n \geq 10$.
+\end{addmargin}
+
+\newpage
+{\noindent\Large\bf Exercise 6.4}\vspace{1em}\par
+Claim: if the missing square is at position $(n,n)$ in the $2^n \times 2^n$ grid, the patio can still be $L$-tiled.\par
+Stronger claim: $P(n):$ if there is a missing square on the $2^n \times 2^n$ patio at any location, the patio can still be $L$-tiled.\par
+Proof:
+\begin{addmargin}{2em}
+	Base case: a $2 \times 2$ grid can be $L$-tiled for every possible location of the black square.\par
+	Induction: assume $P(n)$, prove $P(n+1)$.\par
+	Take a $2^{n+1} \times 2^{n+1}$ grid and split it into four sections. $L$-tile the center such that you do not tile the section containing the missing square. Each of these sections is now a $2^n \times 2^n$ grid with a missing square. Because $P(n)$ is T, we know that we can $L$-tile each of these sections and thereby the whole grid. $P(n+1)$ is T, so $P(n) \rightarrow P(n+1)$, therefore $P(n)$ is true for all $n \geq 1$.
+\end{addmargin}
+\end{document}
